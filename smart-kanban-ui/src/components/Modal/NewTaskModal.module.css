@@ -1,0 +1,165 @@
+.backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal {
+  width: 440px;
+  background: linear-gradient(180deg, #0f172a, #0b1220);
+  border-radius: 14px;
+  padding: 22px;
+  box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+  color: #e5e7eb;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.header h2 {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.close {
+  background: transparent;
+  border: none;
+  color: #9ca3af;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.close:hover {
+  color: #fff;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 14px;
+  font-size: 13px;
+  color: #cbd5f5;
+}
+
+input,
+textarea,
+select {
+  background: #020617;
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 8px;
+  padding: 9px 11px;
+  color: #fff;
+  font-size: 13px;
+}
+
+textarea {
+  resize: none;
+}
+
+.topics {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.topicsHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  font-size: 13px;
+  color: #cbd5f5;
+}
+
+.addTopic {
+  background: transparent;
+  border: 1px dashed rgba(255,255,255,0.25);
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  color: #93c5fd;
+  cursor: pointer;
+}
+
+.addTopic:hover {
+  background: rgba(59,130,246,0.15);
+}
+
+.topicCard {
+  background: #020617;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 10px;
+  padding: 10px;
+  margin-bottom: 10px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.topicTitle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  color: #e5e7eb;
+}
+
+.topicTitle button {
+  background: transparent;
+  border: none;
+  color: #9ca3af;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.topicTitle button:hover {
+  color: #ef4444;
+}
+
+.actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 18px;
+}
+
+.save {
+  background: #3b82f6;
+  border: none;
+  padding: 8px 18px;
+  border-radius: 8px;
+  color: #fff;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.save:hover {
+  background: #2563eb;
+}
+
+.delete {
+  background: #dc2626;
+  border: none;
+  padding: 8px 18px;
+  border-radius: 8px;
+  color: #fff;
+  cursor: pointer;
+}
+
+.delete:hover {
+  background: #b91c1c;
+}
+
+.topicName {
+  font-weight: 700;       
+  font-size: 13px;
+  color: #f9fafb;       
+}

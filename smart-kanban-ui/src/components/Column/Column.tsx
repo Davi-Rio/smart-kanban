@@ -6,19 +6,25 @@ import {
 
 import Card from "../Card/Card";
 import styles from "./Column.module.css";
-
-type Task = {
-  id: string;
-  title: string;
-};
+import type { Task } from "../../types/task";
 
 type Props = {
   id: string;
   title: string;
   tasks: Task[];
+  filterText?: string;
+  onEditTask: (task: Task) => void;
+  onDeleteTask: (taskId: string) => void;
 };
 
-export default function Column({ id, title, tasks }: Props) {
+export default function Column({
+  id,
+  title,
+  tasks,
+  filterText = "",
+  onEditTask,
+  onDeleteTask,
+}: Props) {
   const { setNodeRef } = useDroppable({ id });
 
   return (
@@ -34,11 +40,21 @@ export default function Column({ id, title, tasks }: Props) {
       >
         <div className={styles.cards}>
           {tasks.length === 0 && (
-            <div className={styles.empty}>No tasks here</div>
+            <div className={styles.empty}>
+              {filterText
+                ? `No results for "${filterText}"`
+                : "No tasks here"}
+            </div>
           )}
 
           {tasks.map(task => (
-            <Card key={task.id} id={task.id} title={task.title} />
+            <Card
+              key={task.id}
+              task={task}
+              highlight={filterText}
+              onEdit={() => onEditTask(task)}
+              onDelete={() => onDeleteTask(task.id)}
+            />
           ))}
         </div>
       </SortableContext>
