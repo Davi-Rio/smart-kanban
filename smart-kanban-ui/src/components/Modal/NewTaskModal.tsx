@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import styles from "./NewTaskModal.module.css";
-import type { Task, Topic } from "../../types/task";
+import type { Task, Topic, TaskArea } from "../../types/task";
 
 type ColumnOption = {
   id: string;
@@ -27,16 +27,19 @@ export default function NewTaskModal({
   editingColumnId,
 }: Props) {
   const [title, setTitle] = useState("");
+  const [area, setArea] = useState<TaskArea>("frontend");
   const [topics, setTopics] = useState<Topic[]>([]);
   const [columnId, setColumnId] = useState(columns[0]?.id ?? "");
 
   useEffect(() => {
     if (editingTask) {
       setTitle(editingTask.title);
+      setArea(editingTask.area);
       setTopics(editingTask.topics ?? []);
       setColumnId(editingColumnId ?? columns[0]?.id ?? "");
     } else {
       setTitle("");
+      setArea("frontend");
       setTopics([]);
       setColumnId(columns[0]?.id ?? "");
     }
@@ -70,8 +73,9 @@ export default function NewTaskModal({
     if (!title.trim()) return;
 
     const payload: Omit<Task, "id"> = {
-      title: title.trim(),
-      topics: topics.length ? topics : undefined,
+    title: title.trim(),
+    area,
+    topics: topics.length ? topics : undefined,
     };
 
     if (editingTask) {
@@ -100,6 +104,18 @@ export default function NewTaskModal({
               autoFocus
             />
           </label>
+
+          <label>
+            Area
+            <select value={area} onChange={e => setArea(e.target.value as TaskArea)}>
+                <option value="frontend">Frontend</option>
+                <option value="backend">Backend</option>
+                <option value="qa">QA</option>
+                <option value="devops">DevOps</option>
+                <option value="ux">UX / UI</option>
+                <option value="product">Product</option>
+            </select>
+            </label>
 
           <div className={styles.topics}>
             <div className={styles.topicsHeader}>

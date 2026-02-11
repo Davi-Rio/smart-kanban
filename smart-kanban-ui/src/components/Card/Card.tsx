@@ -26,6 +26,10 @@ function renderHighlightedText(text: string, highlight: string) {
   );
 }
 
+function formatArea(area?: string) {
+  return (area ?? "frontend").toUpperCase();
+}
+
 export default function Card({
   task,
   highlight = "",
@@ -56,6 +60,13 @@ export default function Card({
       {...listeners}
     >
       <div className={styles.content}>
+        <div
+          className={styles.areaBadge}
+          data-area={task.area ?? "frontend"}
+        >
+          {formatArea(task.area)}
+        </div>
+
         <div className={styles.title}>
           {renderHighlightedText(task.title, highlight)}
         </div>
@@ -66,7 +77,9 @@ export default function Card({
               <li key={topic.id} className={styles.topicItem}>
                 <span className={styles.bullet} />
                 <div className={styles.topicText}>
-                  <span className={styles.topicTitle}>{topic.title}</span>
+                  <span className={styles.topicTitle}>
+                    {topic.title}
+                  </span>
                   {topic.description && (
                     <span className={styles.topicDescription}>
                       {topic.description}
@@ -82,21 +95,24 @@ export default function Card({
               </li>
             )}
           </ul>
-          )}
+        )}
       </div>
 
       <div
-        className={styles.actions}
+        className={styles.footer}
         onPointerDown={e => e.stopPropagation()}
       >
-        <button onClick={onEdit} title="Editar">
-          <EditIcon />
-        </button>
+        <div className={styles.actions}>
+          <button onClick={onEdit} title="Editar">
+            <EditIcon />
+          </button>
 
-        <button onClick={onDelete} title="Excluir">
-          <TrashIcon />
-        </button>
+          <button onClick={onDelete} title="Excluir">
+            <TrashIcon />
+          </button>
+        </div>
       </div>
+
     </div>
   );
 }

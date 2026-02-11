@@ -25,7 +25,9 @@ type Props = {
   onCloseModal: () => void;
   onClearFilter: () => void;
   filterText: string;
+  areaFilter: string | null;
 };
+
 
 const STORAGE_KEY = "smart-kanban-board";
 
@@ -38,11 +40,22 @@ const initialColumns: ColumnType[] = [
 function loadColumns(): ColumnType[] {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
-    return raw ? JSON.parse(raw) : initialColumns;
+    if (!raw) return initialColumns;
+
+    const parsed: ColumnType[] = JSON.parse(raw);
+
+    return parsed.map(col => ({
+      ...col,
+      tasks: col.tasks.map(task => ({
+        ...task,
+        area: task.area ?? "frontend", 
+      })),
+    }));
   } catch {
     return initialColumns;
   }
 }
+
 
 export default function Board({
   isModalOpen,
@@ -50,10 +63,11 @@ export default function Board({
   onOpenModal,
   onClearFilter,
   filterText,
+  areaFilter,
 }: Props) {
+
   const [columns, setColumns] = useState<ColumnType[]>(loadColumns);
   const [activeTask, setActiveTask] = useState<Task | null>(null);
-
   const [editingTask, setEditingTask] = useState<Task | null>(null);
   const [editingColumnId, setEditingColumnId] = useState<string | null>(null);
   const [taskToDelete, setTaskToDelete] = useState<Task | null>(null);
@@ -167,17 +181,28 @@ export default function Board({
   }
 
   function requestDeleteTask(task: Task) {
-  setTaskToDelete(task);
-}
+    setTaskToDelete(task);
+  }
 
 
   const normalizedFilter = filterText.toLowerCase();
+
   const filteredColumns = columns.map(col => ({
     ...col,
-    tasks: col.tasks.filter(task =>
-      task.title.toLowerCase().includes(normalizedFilter)
-    ),
+    tasks: col.tasks.filter(task => {
+      const matchesText = task.title
+        .toLowerCase()
+        .includes(normalizedFilter);
+
+      const matchesArea =
+        !areaFilter ||
+        task.area?.toLowerCase() === areaFilter.toLowerCase();
+
+
+      return matchesText && matchesArea;
+    }),
   }));
+
 
   return (
   <>

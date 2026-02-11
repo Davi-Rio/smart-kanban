@@ -8,24 +8,62 @@
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-
 .title {
   font-size: 18px;
   font-weight: 600;
 }
+
+.right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* ===== Area Filter ===== */
+
+.areaFilter {
+  display: flex;
+  gap: 6px;
+}
+
+.areaButton {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #cbd5f5;
+  font-size: 12px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.areaButton:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.areaButton.active {
+  background: rgba(59, 130, 246, 0.25);
+  border-color: rgba(59, 130, 246, 0.5);
+  color: #fff;
+}
+
+/* ===== Actions ===== */
 
 .actions {
   display: flex;
   gap: 12px;
 }
 
-.button {
-  background: transparent;
-  color: var(--text);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  padding: 6px 12px;
+.filterInput {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #fff;
+  padding: 6px 10px;
   border-radius: 6px;
-  cursor: pointer;
+}
+
+.filterInput::placeholder {
+  color: #9ca3af;
 }
 
 .buttonPrimary {
@@ -35,4 +73,40 @@
   padding: 6px 14px;
   border-radius: 6px;
   cursor: pointer;
+}
+
+.areaButton[data-area="frontend"].active {
+  background: rgba(59, 130, 246, 0.25);
+  border-color: rgba(59, 130, 246, 0.5);
+  color: #fff;
+}
+
+.areaButton[data-area="backend"].active {
+  background: rgba(16, 185, 129, 0.25);
+  border-color: rgba(16, 185, 129, 0.5);
+  color: #fff;
+}
+
+.areaButton[data-area="qa"].active {
+  background: rgba(234, 179, 8, 0.25);
+  border-color: rgba(234, 179, 8, 0.5);
+  color: #fff;
+}
+
+.areaButton[data-area="devops"].active {
+  background: rgba(139, 92, 246, 0.25);
+  border-color: rgba(139, 92, 246, 0.5);
+  color: #fff;
+}
+
+.areaButton[data-area="ux"].active {
+  background: rgba(236, 72, 153, 0.25);
+  border-color: rgba(236, 72, 153, 0.5);
+  color: #fff;
+}
+
+.areaButton[data-area="product"].active {
+  background: rgba(148, 163, 184, 0.25);
+  border-color: rgba(148, 163, 184, 0.5);
+  color: #fff;
 }
