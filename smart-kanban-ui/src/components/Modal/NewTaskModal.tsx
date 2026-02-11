@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import styles from "./NewTaskModal.module.css";
 import type { Task, Topic, TaskArea } from "../../types/task";
+import Select from "../ui/Select";
 
 type ColumnOption = {
   id: string;
@@ -104,19 +105,21 @@ export default function NewTaskModal({
               autoFocus
             />
           </label>
-
-          <label>
-            Area
-            <select value={area} onChange={e => setArea(e.target.value as TaskArea)}>
-                <option value="frontend">Frontend</option>
-                <option value="backend">Backend</option>
-                <option value="qa">QA</option>
-                <option value="devops">DevOps</option>
-                <option value="ux">UX / UI</option>
-                <option value="product">Product</option>
-            </select>
-            </label>
-
+            <div className={styles.field}>
+              <span className={styles.fieldLabel}>Area</span>
+              <Select
+                value={area}
+                onChange={(v) => setArea(v as TaskArea)}
+                options={[
+                  { value: "frontend", label: "Frontend" },
+                  { value: "backend", label: "Backend" },
+                  { value: "qa", label: "QA" },
+                  { value: "devops", label: "DevOps" },
+                  { value: "ux", label: "UX / UI" },
+                  { value: "product", label: "Product" },
+                ]}
+              />
+            </div>
           <div className={styles.topics}>
             <div className={styles.topicsHeader}>
               <span>Topics</span>
@@ -165,19 +168,17 @@ export default function NewTaskModal({
           </div>
 
           {!editingTask && (
-            <label>
-              Column
-              <select
+            <div className={styles.field}>
+              <span className={styles.fieldLabel}>Column</span>
+              <Select
                 value={columnId}
-                onChange={e => setColumnId(e.target.value)}
-              >
-                {columns.map(col => (
-                  <option key={col.id} value={col.id}>
-                    {col.title}
-                  </option>
-                ))}
-              </select>
-            </label>
+                onChange={setColumnId}
+                options={columns.map(col => ({
+                  value: col.id,
+                  label: col.title,
+                }))}
+              />
+            </div>
           )}
 
           <div className={styles.actions}>

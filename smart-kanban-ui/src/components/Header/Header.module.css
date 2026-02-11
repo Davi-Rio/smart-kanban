@@ -1,25 +1,27 @@
 .header {
-  height: 56px;
-  padding: 0 24px;
-  background: var(--bg-topbar);
+  height: 72px;
+  padding: 0 40px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  background: rgba(10, 15, 30, 0.6);
+  backdrop-filter: blur(12px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
+
 .title {
-  font-size: 18px;
+  font-size: 22px;
   font-weight: 600;
+  letter-spacing: -0.3px;
+  color: #f1f5f9;
 }
 
 .right {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 28px;
 }
-
-/* ===== Area Filter ===== */
 
 .areaFilter {
   display: flex;
@@ -27,19 +29,22 @@
 }
 
 .areaButton {
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   color: #cbd5f5;
   font-size: 12px;
-  padding: 4px 10px;
+  font-weight: 500;
+  padding: 6px 12px;
   border-radius: 999px;
   cursor: pointer;
-  transition: all 0.15s ease;
+  transition: all 0.2s ease;
 }
 
 .areaButton:hover {
-  background: rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.15);
 }
+
 
 .areaButton.active {
   background: rgba(59, 130, 246, 0.25);
@@ -47,7 +52,6 @@
   color: #fff;
 }
 
-/* ===== Actions ===== */
 
 .actions {
   display: flex;
@@ -55,25 +59,46 @@
 }
 
 .filterInput {
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   color: #fff;
-  padding: 6px 10px;
-  border-radius: 6px;
+  padding: 8px 14px;
+  border-radius: 8px;
+  transition: all 0.2s ease;
 }
+
+.filterInput:focus {
+  outline: none;
+  border-color: rgba(59, 130, 246, 0.6);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+}
+
 
 .filterInput::placeholder {
   color: #9ca3af;
 }
 
 .buttonPrimary {
-  background: var(--primary);
+  background: linear-gradient(
+    135deg,
+    #3b82f6,
+    #2563eb
+  );
+  box-shadow: 0 6px 18px rgba(59, 130, 246, 0.25);
   color: #fff;
   border: none;
-  padding: 6px 14px;
-  border-radius: 6px;
+  padding: 8px 18px;
+  border-radius: 8px;
+  font-weight: 500;
   cursor: pointer;
+  transition: all 0.2s ease;
 }
+
+.buttonPrimary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 28px rgba(59, 130, 246, 0.35);
+}
+
 
 .areaButton[data-area="frontend"].active {
   background: rgba(59, 130, 246, 0.25);

@@ -1,7 +1,19 @@
 .board {
   display: flex;
-  gap: 16px;
+  gap: 24px;
   align-items: flex-start;
-  overflow-x: auto; 
-  padding-bottom: 8px;
+  overflow-x: auto;
+
+  background: rgba(12, 18, 32, 0.85);
+
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 28px;
+
+  padding: 40px;
+
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.03),
+    0 30px 80px rgba(0, 0, 0, 0.45);
+
+  backdrop-filter: blur(10px);
 }
