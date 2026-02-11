@@ -1,7 +1,7 @@
 import { CSS } from "@dnd-kit/utilities";
 import { useSortable } from "@dnd-kit/sortable";
 import styles from "./Card.module.css";
-import { EditIcon, TrashIcon } from "../Icons/Icons";
+import { EditIcon, TrashIcon, UserIcon } from "../Icons/Icons";
 import type { Task } from "../../types/task";
 
 type Props = {
@@ -60,6 +60,10 @@ export default function Card({
       {...listeners}
     >
       <div className={styles.content}>
+        <div className={styles.userIcon}>
+          <UserIcon size={22} />
+        </div>
+
         <div
           className={styles.areaBadge}
           data-area={task.area ?? "frontend"}
