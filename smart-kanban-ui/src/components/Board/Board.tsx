@@ -11,6 +11,7 @@ import Card from "../Card/Card";
 import NewTaskModal from "../Modal/NewTaskModal";
 import styles from "./Board.module.css";
 import type { Task } from "../../types/task";
+import ConfirmDeleteModal from "../Modal/ConfirmDeleteModal";
 
 type ColumnType = {
   id: string;
@@ -55,14 +56,13 @@ export default function Board({
 
   const [editingTask, setEditingTask] = useState<Task | null>(null);
   const [editingColumnId, setEditingColumnId] = useState<string | null>(null);
+  const [taskToDelete, setTaskToDelete] = useState<Task | null>(null);
 
-  /* ---------------- PERSIST ---------------- */
 
   useEffect(() => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(columns));
   }, [columns]);
 
-  /* ---------------- DRAG ---------------- */
 
   function handleDragStart(event: DragStartEvent) {
     const taskId = event.active.id;
@@ -123,8 +123,6 @@ export default function Board({
     });
   }
 
-  /* ---------------- CRUD (OPÇÃO A) ---------------- */
-
   function addTask(
     taskData: Omit<Task, "id">,
     columnId: string
@@ -159,7 +157,7 @@ export default function Board({
     onClearFilter();
   }
 
-  function deleteTask(taskId: string) {
+  function confirmDeleteTask(taskId: string) {
     setColumns(cols =>
       cols.map(col => ({
         ...col,
@@ -168,10 +166,12 @@ export default function Board({
     );
   }
 
-  /* ---------------- FILTER ---------------- */
+  function requestDeleteTask(task: Task) {
+  setTaskToDelete(task);
+}
+
 
   const normalizedFilter = filterText.toLowerCase();
-
   const filteredColumns = columns.map(col => ({
     ...col,
     tasks: col.tasks.filter(task =>
@@ -179,65 +179,83 @@ export default function Board({
     ),
   }));
 
-  /* ---------------- RENDER ---------------- */
-
   return (
-    <>
-      {isModalOpen && (
-        <NewTaskModal
-          columns={columns.map(col => ({
-            id: col.id,
-            title: col.title,
-          }))}
-          editingTask={editingTask}
-          editingColumnId={editingColumnId}
-          onCreate={addTask}
-          onUpdate={updateTask}
-          onDelete={deleteTask}
-          onClose={() => {
-            setEditingTask(null);
-            setEditingColumnId(null);
-            onCloseModal();
-          }}
-        />
-      )}
+  <>
+    {isModalOpen && (
+      <NewTaskModal
+        columns={columns.map(col => ({
+          id: col.id,
+          title: col.title,
+        }))}
+        editingTask={editingTask}
+        editingColumnId={editingColumnId}
+        onCreate={addTask}
+        onUpdate={updateTask}
+        onDelete={() => {
+          if (editingTask) {
+            setTaskToDelete(editingTask);
+          }
+        }}
+        onClose={() => {
+          setEditingTask(null);
+          setEditingColumnId(null);
+          onCloseModal();
+        }}
+      />
 
-      <DndContext
-        collisionDetection={closestCorners}
-        onDragStart={handleDragStart}
-        onDragOver={handleDragOver}
-        onDragEnd={handleDragEnd}
-      >
-        <div className={styles.board}>
-          {filteredColumns.map(col => (
-            <Column
-              key={col.id}
-              id={col.id}
-              title={col.title}
-              tasks={col.tasks}
-              filterText={filterText}
-              onEditTask={task => {
-                setEditingTask(task);
-                setEditingColumnId(col.id);
-                onOpenModal();
-              }}
-              onDeleteTask={deleteTask}
+    )}
+
+    <DndContext
+      collisionDetection={closestCorners}
+      onDragStart={handleDragStart}
+      onDragOver={handleDragOver}
+      onDragEnd={handleDragEnd}
+    >
+      <div className={styles.board}>
+        {filteredColumns.map(col => (
+          <Column
+            key={col.id}
+            id={col.id}
+            title={col.title}
+            tasks={col.tasks}
+            filterText={filterText}
+            onEditTask={task => {
+              setEditingTask(task);
+              setEditingColumnId(col.id);
+              onOpenModal();
+            }}
+            onDeleteTask={task => requestDeleteTask(task)}
+          />
+        ))}
+      </div>
+
+      <DragOverlay>
+        {activeTask && (
+          <div style={{ width: 260 }}>
+            <Card
+              task={activeTask}
+              onEdit={() => {}}
+              onDelete={() => {}}
             />
-          ))}
-        </div>
+          </div>
+        )}
+      </DragOverlay>
+    </DndContext>
 
-        <DragOverlay>
-          {activeTask && (
-            <div style={{ width: 260 }}>
-              <Card
-                task={activeTask}
-                onEdit={() => {}}
-                onDelete={() => {}}
-              />
-            </div>
-          )}
-        </DragOverlay>
-      </DndContext>
-    </>
-  );
+    {taskToDelete && (
+      <ConfirmDeleteModal
+        taskTitle={taskToDelete.title}
+        onCancel={() => setTaskToDelete(null)}
+        onConfirm={() => {
+          confirmDeleteTask(taskToDelete.id);
+          setTaskToDelete(null);
+          setEditingTask(null);
+          setEditingColumnId(null);
+          onCloseModal();              
+        }}
+      />
+    )}
+  </>
+);
+
 }

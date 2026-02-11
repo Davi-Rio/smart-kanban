@@ -85,7 +85,6 @@ export default function Card({
           )}
       </div>
 
-      {/* ACTIONS */}
       <div
         className={styles.actions}
         onPointerDown={e => e.stopPropagation()}

@@ -13,7 +13,6 @@
   width: 180px;
 }
 
-/* Logo */
 .logo {
   font-weight: 700;
   font-size: 18px;
@@ -22,14 +21,12 @@
   color: #fff;
 }
 
-/* Menu */
 .nav {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 
-/* Item */
 .item {
   display: flex;
   align-items: center;
@@ -51,14 +48,12 @@
   color: #fff;
 }
 
-/* Ícone */
 .icon {
   min-width: 24px;
   display: grid;
   place-items: center;
 }
 
-/* Label */
 .label {
   white-space: nowrap;
   opacity: 0;

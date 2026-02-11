@@ -3,6 +3,8 @@ import {
   SortableContext,
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
+import CardSkeleton from "../Card/CardSkeleton";
+import { useEffect, useState } from "react";
 
 import Card from "../Card/Card";
 import styles from "./Column.module.css";
@@ -14,7 +16,7 @@ type Props = {
   tasks: Task[];
   filterText?: string;
   onEditTask: (task: Task) => void;
-  onDeleteTask: (taskId: string) => void;
+  onDeleteTask: (task: Task) => void;
 };
 
 export default function Column({
@@ -27,6 +29,17 @@ export default function Column({
 }: Props) {
   const { setNodeRef } = useDroppable({ id });
 
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 500); 
+
+    return () => clearTimeout(timer);
+  }, []);
+
+
   return (
     <div ref={setNodeRef} className={styles.column}>
       <div className={styles.header}>
@@ -38,25 +51,36 @@ export default function Column({
         items={tasks.map(t => t.id)}
         strategy={verticalListSortingStrategy}
       >
-        <div className={styles.cards}>
-          {tasks.length === 0 && (
-            <div className={styles.empty}>
-              {filterText
-                ? `No results for "${filterText}"`
-                : "No tasks here"}
-            </div>
-          )}
+      <div className={styles.cards}>
+        {loading ? (
+          <>
+            <CardSkeleton />
+            <CardSkeleton />
+            <CardSkeleton />
+          </>
+        ) : (
+          <>
+            {tasks.length === 0 && (
+              <div className={styles.empty}>
+                {filterText
+                  ? `No results for "${filterText}"`
+                  : "No tasks here"}
+              </div>
+            )}
 
-          {tasks.map(task => (
-            <Card
-              key={task.id}
-              task={task}
-              highlight={filterText}
-              onEdit={() => onEditTask(task)}
-              onDelete={() => onDeleteTask(task.id)}
-            />
-          ))}
-        </div>
+            {tasks.map(task => (
+              <Card
+                key={task.id}
+                task={task}
+                highlight={filterText}
+                onEdit={() => onEditTask(task)}
+                onDelete={() => onDeleteTask(task)}
+              />
+            ))}
+          </>
+        )}
+      </div>
+
       </SortableContext>
     </div>
   );

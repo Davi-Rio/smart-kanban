@@ -92,7 +92,6 @@ export default function NewTaskModal({
         </div>
 
         <form onSubmit={handleSubmit}>
-          {/* TITLE */}
           <label>
             Title
             <input
@@ -102,7 +101,6 @@ export default function NewTaskModal({
             />
           </label>
 
-          {/* TOPICS */}
           <div className={styles.topics}>
             <div className={styles.topicsHeader}>
               <span>Topics</span>
@@ -150,7 +148,6 @@ export default function NewTaskModal({
             ))}
           </div>
 
-          {/* COLUMN */}
           {!editingTask && (
             <label>
               Column
@@ -167,23 +164,23 @@ export default function NewTaskModal({
             </label>
           )}
 
-          {/* ACTIONS */}
           <div className={styles.actions}>
             <button type="submit" className={styles.save}>
               {editingTask ? "Save" : "Create"}
             </button>
 
             {editingTask && (
-              <button
+                <button
                 type="button"
                 className={styles.delete}
                 onClick={() => {
-                  onDelete(editingTask.id);
-                  onClose();
+                    if (editingTask) {
+                    onDelete(editingTask.id);
+                    }
                 }}
-              >
+                >
                 Delete
-              </button>
+                </button>
             )}
           </div>
         </form>
