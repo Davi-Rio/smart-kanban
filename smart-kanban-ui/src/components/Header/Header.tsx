@@ -71,6 +71,7 @@ export default function Header({
           {AREAS.map(area => (
             <button
               key={area.id ?? "all"}
+              data-area={area.id ?? "all"}
               className={`${styles.areaButton} ${
                 areaFilter === area.id ? styles.active : ""
               }`}
