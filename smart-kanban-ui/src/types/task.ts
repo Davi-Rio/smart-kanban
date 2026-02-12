@@ -5,7 +5,6 @@ export type TaskArea =
   | "devops"
   | "ux"
   | "product";
-
 export type Topic = {
   id: string;
   title: string;
@@ -18,4 +17,5 @@ export type Task = {
   description?: string;
   area: TaskArea;
   topics?: Topic[];
+  sprint?: string;
 };

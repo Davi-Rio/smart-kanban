@@ -48,7 +48,8 @@ function loadColumns(): ColumnType[] {
       ...col,
       tasks: col.tasks.map(task => ({
         ...task,
-        area: task.area ?? "frontend", 
+        area: task.area ?? "frontend",
+        sprint: task.sprint ?? "Sprint 1",
       })),
     }));
   } catch {

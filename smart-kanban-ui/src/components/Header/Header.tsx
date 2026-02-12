@@ -60,45 +60,49 @@ export default function Header({
   const location = useLocation();
   const title = getPageTitle(location.pathname);
 
+  const isBoard = location.pathname === "/board" || location.pathname === "/";
+
   return (
     <header className={styles.header}>
       <div className={styles.left}>
         <h2 className={styles.title}>{title}</h2>
       </div>
 
-      <div className={styles.right}>
-        <div className={styles.areaFilter}>
-          {AREAS.map(area => (
+      {isBoard && (
+        <div className={styles.right}>
+          <div className={styles.areaFilter}>
+            {AREAS.map(area => (
+              <button
+                key={area.id ?? "all"}
+                data-area={area.id ?? "all"}
+                className={`${styles.areaButton} ${
+                  areaFilter === area.id ? styles.active : ""
+                }`}
+                onClick={() => onAreaChange(area.id)}
+              >
+                {area.label}
+              </button>
+            ))}
+          </div>
+
+          <div className={styles.actions}>
+            <input
+              className={styles.filterInput}
+              type="text"
+              placeholder="Filter tasks..."
+              value={filterText}
+              onChange={e => onFilterChange(e.target.value)}
+            />
+
             <button
-              key={area.id ?? "all"}
-              data-area={area.id ?? "all"}
-              className={`${styles.areaButton} ${
-                areaFilter === area.id ? styles.active : ""
-              }`}
-              onClick={() => onAreaChange(area.id)}
+              className={styles.buttonPrimary}
+              onClick={onNewTask}
             >
-              {area.label}
+              New Task
             </button>
-          ))}
+          </div>
         </div>
-
-        <div className={styles.actions}>
-          <input
-            className={styles.filterInput}
-            type="text"
-            placeholder="Filter tasks..."
-            value={filterText}
-            onChange={e => onFilterChange(e.target.value)}
-          />
-
-          <button
-            className={styles.buttonPrimary}
-            onClick={onNewTask}
-          >
-            New Task
-          </button>
-        </div>
-      </div>
+      )}
     </header>
   );
 }
