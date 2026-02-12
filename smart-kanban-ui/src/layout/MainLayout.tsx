@@ -1,5 +1,6 @@
 import Sidebar from "../components/Sidebar/Sidebar";
 import Header from "../components/Header/Header";
+import GlobalNav from "../components/GlobalNav/GlobalNav";
 
 type Props = {
   children: React.ReactNode;
@@ -23,6 +24,8 @@ export default function MainLayout({
     <div className="app-layout">
       <Sidebar />
       <div className="app-content">
+        <GlobalNav />
+
         <Header
           onNewTask={onNewTask}
           filterText={filterText}
@@ -30,6 +33,7 @@ export default function MainLayout({
           areaFilter={areaFilter}
           onAreaChange={onAreaChange}
         />
+
         <main>{children}</main>
       </div>
     </div>

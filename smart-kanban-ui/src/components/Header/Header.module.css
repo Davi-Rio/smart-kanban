@@ -11,7 +11,7 @@
 
 
 .title {
-  font-size: 22px;
+  font-size: 20px;
   font-weight: 600;
   letter-spacing: -0.3px;
   color: #f1f5f9;
@@ -20,7 +20,7 @@
 .right {
   display: flex;
   align-items: center;
-  gap: 28px;
+  gap: 16px;
 }
 
 .areaFilter {
@@ -84,19 +84,22 @@
     #3b82f6,
     #2563eb
   );
-  box-shadow: 0 6px 18px rgba(59, 130, 246, 0.25);
+
   color: #fff;
   border: none;
+
   padding: 8px 18px;
   border-radius: 8px;
+
   font-weight: 500;
+
   cursor: pointer;
   transition: all 0.2s ease;
 }
 
 .buttonPrimary:hover {
   transform: translateY(-1px);
-  box-shadow: 0 12px 28px rgba(59, 130, 246, 0.35);
+  box-shadow: 0 8px 20px rgba(59, 130, 246, 0.35);
 }
 
 

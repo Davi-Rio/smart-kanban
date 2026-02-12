@@ -1,3 +1,4 @@
+import { useLocation } from "react-router-dom";
 import styles from "./Header.module.css";
 
 type AreaOption = {
@@ -19,10 +20,35 @@ type Props = {
   onNewTask: () => void;
   filterText: string;
   onFilterChange: (value: string) => void;
-
   areaFilter: string | null;
   onAreaChange: (area: string | null) => void;
 };
+
+function getPageTitle(pathname: string) {
+  switch (pathname) {
+    case "/roadmap":
+      return "Roadmap";
+    case "/backlog":
+      return "Backlog";
+    case "/board":
+    case "/":
+      return "Board";
+    case "/reports":
+      return "Reports";
+    case "/issues":
+      return "Issues";
+    case "/code":
+      return "Code";
+    case "/security":
+      return "Security";
+    case "/releases":
+      return "Releases";
+    case "/settings":
+      return "Project Settings";
+    default:
+      return "Board";
+  }
+}
 
 export default function Header({
   onNewTask,
@@ -31,21 +57,25 @@ export default function Header({
   areaFilter,
   onAreaChange,
 }: Props) {
+  const location = useLocation();
+  const title = getPageTitle(location.pathname);
+
   return (
     <header className={styles.header}>
-      <h2 className={styles.title}>Marketing Board</h2>
+      <div className={styles.left}>
+        <h2 className={styles.title}>{title}</h2>
+      </div>
 
       <div className={styles.right}>
         <div className={styles.areaFilter}>
           {AREAS.map(area => (
-              <button
-                key={area.id ?? "all"}
-                data-area={area.id ?? "all"}
-                className={`${styles.areaButton} ${
-                  areaFilter === area.id ? styles.active : ""
-                }`}
-                onClick={() => onAreaChange(area.id)}
-              >
+            <button
+              key={area.id ?? "all"}
+              className={`${styles.areaButton} ${
+                areaFilter === area.id ? styles.active : ""
+              }`}
+              onClick={() => onAreaChange(area.id)}
+            >
               {area.label}
             </button>
           ))}
