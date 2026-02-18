@@ -183,3 +183,172 @@ Automation & Systems Engineering
 ## 📄 License
 
 MIT
+
+---
+
+# 🏗 Architecture
+
+Smart Kanban follows a modular and scalable front-end architecture, structured to simulate a real SaaS application environment.
+
+---
+
+## High-Level Architecture
+
+```mermaid
+flowchart TD
+
+    UI[UI Layer] --> Pages[Pages Layer]
+    Pages --> Components[Feature Components]
+    Components --> State[State Layer]
+    State --> Storage[LocalStorage Persistence]
+
+    subgraph Pages
+        Dashboard
+        Board
+        Teams
+        Apps
+    end
+
+    UI --> Dashboard
+    UI --> Board
+    UI --> Teams
+    UI --> Apps
+
+    Board --> State
+    State --> Storage
+
+    Dashboard --> State
+    Teams --> State
+```
+
+---
+
+## 🧠 Architecture Explanation
+
+### 1️⃣ UI Layer
+
+Responsible for layout and navigation:
+- Sidebar
+- Header
+- Navigation between pages
+
+This layer is presentation-focused and stateless.
+
+---
+
+### 2️⃣ Pages Layer
+
+Each page is isolated and modular:
+
+- DashboardPage
+- BoardPage
+- TeamsPage
+- AppsPage
+
+Each page:
+- Consumes state
+- Derives data
+- Renders feature components
+
+There is no tight coupling between pages.
+
+---
+
+### 3️⃣ Feature Components
+
+Reusable components such as:
+
+- Column
+- Card
+- NewTaskModal
+- ConfirmDeleteModal
+- MemberCard
+- IntegrationCard
+
+Encapsulated and independent.
+
+---
+
+### 4️⃣ State Layer
+
+State is managed using:
+
+- useState
+- useEffect
+- useMemo
+
+Board acts as the **source of truth**.
+
+Derived state feeds:
+
+- Dashboard KPIs
+- Teams task count
+- Sprint progress
+- Status chart
+
+---
+
+### 5️⃣ Persistence Layer
+
+Tasks are stored in:
+
+```
+localStorage
+```
+
+This simulates backend persistence in a front-end-only environment.
+
+---
+
+## 🔄 Data Flow
+
+```mermaid
+flowchart LR
+
+    Board --> LocalStorage
+    LocalStorage --> Dashboard
+    LocalStorage --> Teams
+    Dashboard --> Metrics
+    Teams --> Aggregation
+```
+
+Board is the mutation layer.  
+Dashboard and Teams are read-only consumers.
+
+This simulates a real SaaS pattern:
+
+Central Data Source → Multiple Consumers
+
+---
+
+## 🧱 Architectural Benefits
+
+- Modular design
+- Clear separation of concerns
+- Clean data flow
+- Scalable structure
+- Easily migratable to backend API
+- Ready for Context API / Zustand / Redux
+- Prepared for real backend integration
+
+---
+
+## 🚀 Future Evolution
+
+```mermaid
+flowchart TD
+
+    UI --> API
+    API --> Database
+    API --> AuthService
+    API --> WebSocket
+    WebSocket --> UI
+```
+
+This would enable:
+
+- Multi-user system
+- Real-time collaboration
+- Role-based access control
+- Advanced analytics
+- External integrations
