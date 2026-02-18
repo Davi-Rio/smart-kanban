@@ -1,0 +1,239 @@
+.page {
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+}
+
+.title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #f1f5f9;
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.statCard {
+  background: #0f172a;
+  border: 1px solid #1e293b;
+  padding: 20px;
+  border-radius: 14px;
+  transition: all 0.3s ease;
+}
+
+.statCard:hover {
+  border-color: #334155;
+  box-shadow: 0 0 25px rgba(59, 130, 246, 0.15);
+}
+
+.statCard h3 {
+  font-size: 14px;
+  color: #94a3b8;
+}
+
+.statCard p {
+  font-size: 26px;
+  font-weight: 700;
+  color: #f8fafc;
+}
+
+.pieSection {
+  background: linear-gradient(145deg, #0f172a, #0b1220);
+  border: 1px solid #1e293b;
+  border-radius: 22px;
+  padding: 40px;
+  position: relative;
+  overflow: hidden;
+}
+
+.pieHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.backButton {
+  background: transparent;
+  border: 1px solid #1e293b;
+  color: #94a3b8;
+  padding: 6px 14px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 12px;
+}
+
+.backButton:hover {
+  background: #1e293b;
+  color: #f8fafc;
+  border-color: #334155;
+}
+
+.pieWrapper {
+  position: relative;
+  width: 100%;
+  height: 360px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pieCenter {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  text-align: center;
+}
+
+.pieCenter span {
+  font-size: 32px;
+  font-weight: 800;
+  color: #f1f5f9;
+  line-height: 1;
+}
+
+.pieCenter small {
+  font-size: 12px;
+  letter-spacing: 1px;
+  color: #94a3b8;
+  margin-top: 4px;
+}
+
+.tooltip {
+  background: #0f172a;
+  border: 1px solid #334155;
+  padding: 14px 18px;
+  border-radius: 14px;
+  box-shadow: 0 0 25px rgba(59,130,246,0.4);
+  animation: fadeIn 0.25s ease;
+  font-size: 13px;
+}
+
+.tooltipDone { color: #22c55e; }
+.tooltipProgress { color: #3b82f6; }
+.tooltipTodo { color: #f59e0b; }
+
+.inlineTasks {
+  margin-top: 35px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  animation: slideUp 0.4s ease;
+}
+
+.taskItem {
+  display: flex;
+  justify-content: space-between;
+  padding: 14px 16px;
+  background: #0b1220;
+  border: 1px solid #1e293b;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.taskItem:hover {
+  border-color: #334155;
+  transform: translateY(-2px);
+  box-shadow: 0 0 15px rgba(59,130,246,0.15);
+}
+
+.status {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.done {
+  color: #22c55e;
+}
+
+.progress {
+  color: #3b82f6;
+}
+
+.todo {
+  color: #f59e0b;
+}
+
+.pieLayout {
+  display: flex;
+  gap: 60px;
+  align-items: center;
+  justify-content: center;
+}
+
+.legendContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 8px 12px;
+  border-radius: 10px;
+}
+
+.legendItem:hover {
+  background: rgba(59,130,246,0.08);
+  transform: translateX(4px);
+}
+
+.legendColor {
+  width: 14px;
+  height: 14px;
+  border-radius: 4px;
+}
+
+.legendText {
+  display: flex;
+  flex-direction: column;
+}
+
+.legendText strong {
+  font-size: 13px;
+  color: #f8fafc;
+}
+
+.legendText span {
+  font-size: 11px;
+  color: #94a3b8;
+}
+
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+

@@ -18,6 +18,14 @@ type Props = {
   editingColumnId: string | null;
 };
 
+const EPIC_OPTIONS = [
+  { value: "core-auth", label: "Authentication & Authorization" },
+  { value: "core-project", label: "Project Management Core" },
+  { value: "ux-refactor", label: "Drag & Drop UX Refinement" },
+  { value: "multi-user", label: "Multi-user Workspace" },
+  { value: "comments", label: "Task Discussion System" },
+];
+
 export default function NewTaskModal({
   columns,
   onClose,
@@ -31,6 +39,7 @@ export default function NewTaskModal({
   const [area, setArea] = useState<TaskArea>("frontend");
   const [topics, setTopics] = useState<Topic[]>([]);
   const [columnId, setColumnId] = useState(columns[0]?.id ?? "");
+  const [epicId, setEpicId] = useState<string | undefined>(undefined);
 
   useEffect(() => {
     if (editingTask) {
@@ -38,11 +47,13 @@ export default function NewTaskModal({
       setArea(editingTask.area);
       setTopics(editingTask.topics ?? []);
       setColumnId(editingColumnId ?? columns[0]?.id ?? "");
+      setEpicId(editingTask.epicId);
     } else {
       setTitle("");
       setArea("frontend");
       setTopics([]);
       setColumnId(columns[0]?.id ?? "");
+      setEpicId(undefined);
     }
   }, [editingTask, editingColumnId, columns]);
 
@@ -74,9 +85,10 @@ export default function NewTaskModal({
     if (!title.trim()) return;
 
     const payload: Omit<Task, "id"> = {
-    title: title.trim(),
-    area,
-    topics: topics.length ? topics : undefined,
+      title: title.trim(),
+      area,
+      topics: topics.length ? topics : undefined,
+      epicId, 
     };
 
     if (editingTask) {
@@ -88,7 +100,7 @@ export default function NewTaskModal({
     onClose();
   }
 
- return (
+  return (
     <div className={styles.backdrop} onClick={onClose}>
       <div className={styles.modal} onClick={e => e.stopPropagation()}>
         <div className={styles.header}>
@@ -105,21 +117,35 @@ export default function NewTaskModal({
               autoFocus
             />
           </label>
-            <div className={styles.field}>
-              <span className={styles.fieldLabel}>Area</span>
-              <Select
-                value={area}
-                onChange={(v) => setArea(v as TaskArea)}
-                options={[
-                  { value: "frontend", label: "Frontend" },
-                  { value: "backend", label: "Backend" },
-                  { value: "qa", label: "QA" },
-                  { value: "devops", label: "DevOps" },
-                  { value: "ux", label: "UX / UI" },
-                  { value: "product", label: "Product" },
-                ]}
-              />
-            </div>
+
+          <div className={styles.field}>
+            <span className={styles.fieldLabel}>Area</span>
+            <Select
+              value={area}
+              onChange={(v) => setArea(v as TaskArea)}
+              options={[
+                { value: "frontend", label: "Frontend" },
+                { value: "backend", label: "Backend" },
+                { value: "qa", label: "QA" },
+                { value: "devops", label: "DevOps" },
+                { value: "ux", label: "UX / UI" },
+                { value: "product", label: "Product" },
+              ]}
+            />
+          </div>
+
+          <div className={styles.field}>
+            <span className={styles.fieldLabel}>Epic</span>
+            <Select
+              value={epicId ?? ""}
+              onChange={(v) => setEpicId(v || undefined)}
+              options={[
+                { value: "", label: "RoadMap" },
+                ...EPIC_OPTIONS,
+              ]}
+            />
+          </div>
+
           <div className={styles.topics}>
             <div className={styles.topicsHeader}>
               <span>Topics</span>
@@ -135,16 +161,16 @@ export default function NewTaskModal({
             {topics.map((topic, index) => (
               <div key={topic.id} className={styles.topicCard}>
                 <div className={styles.topicTitle}>
-                <span className={styles.topicName}>
+                  <span className={styles.topicName}>
                     Topic {index + 1}
-                </span>
+                  </span>
 
-                <button
+                  <button
                     type="button"
                     onClick={() => removeTopic(topic.id)}
-                >
+                  >
                     ✕
-                </button>
+                  </button>
                 </div>
 
                 <input
@@ -187,17 +213,17 @@ export default function NewTaskModal({
             </button>
 
             {editingTask && (
-                <button
+              <button
                 type="button"
                 className={styles.delete}
                 onClick={() => {
-                    if (editingTask) {
+                  if (editingTask) {
                     onDelete(editingTask.id);
-                    }
+                  }
                 }}
-                >
+              >
                 Delete
-                </button>
+              </button>
             )}
           </div>
         </form>

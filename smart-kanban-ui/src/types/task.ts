@@ -17,5 +17,6 @@ export type Task = {
   description?: string;
   area: TaskArea;
   topics?: Topic[];
+  epicId?: string;
   sprint?: string;
 };

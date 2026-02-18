@@ -1,0 +1,118 @@
+.container {
+  padding: 40px;
+}
+
+.metrics {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+.metricCard {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+  padding: 24px 28px;
+  transition: 0.2s ease;
+}
+
+.metricCard:hover {
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+.metricNumber {
+  font-size: 28px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.metricLabel {
+  font-size: 13px;
+  color: #9ca3af;
+  margin-top: 6px;
+}
+
+.tableWrapper {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.headerRow {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  padding: 16px 20px;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: #9ca3af;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  align-items: center;
+  padding: 18px 20px;
+  transition: background 0.2s ease;
+}
+
+.row:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.titleCell {
+  font-size: 14px;
+  font-weight: 500;
+  color: #f1f5f9;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 10px;
+  font-size: 11px;
+  font-weight: 500;
+  border-radius: 6px;
+  width: fit-content;
+}
+
+.Low {
+  background: rgba(34, 197, 94, 0.15);
+  color: #22c55e;
+}
+
+.Medium {
+  background: rgba(245, 158, 11, 0.15);
+  color: #f59e0b;
+}
+
+.High {
+  background: rgba(239, 68, 68, 0.15);
+  color: #ef4444;
+}
+
+.Critical {
+  background: rgba(185, 28, 28, 0.18);
+  color: #f87171;
+}
+
+.open {
+  background: rgba(245, 158, 11, 0.15);
+  color: #f59e0b;
+}
+
+.fixed {
+  background: rgba(16, 185, 129, 0.15);
+  color: #10b981;
+}
+
+.issueLink {
+  color: #3b82f6;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+}
