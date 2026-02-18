@@ -98,29 +98,6 @@ Design decisions:
 
 ---
 
-## 📦 Project Structure
-
-src/
-├── components/
-│ ├── Board/
-│ ├── Column/
-│ ├── Card/
-│ ├── Modal/
-│
-├── pages/
-│ ├── DashboardsPage/
-│ ├── BoardPage/
-│ ├── TeamsPage/
-│ ├── AppsPage/
-│
-├── types/
-│ └── task.ts
-
-
-Architecture is modular and scalable.
-
----
-
 ## 🧠 State Strategy
 
 - Tasks stored in localStorage
