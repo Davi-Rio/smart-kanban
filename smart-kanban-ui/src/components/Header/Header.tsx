@@ -26,25 +26,46 @@ type Props = {
 
 function getPageTitle(pathname: string) {
   switch (pathname) {
+    case "/projects":
+      return "Projects";
+
+    case "/dashboards":
+      return "Dashboards";
+
+    case "/teams":
+      return "Teams";
+
+    case "/apps":
+      return "Apps";
+
     case "/roadmap":
       return "Roadmap";
+
     case "/backlog":
       return "Backlog";
+
     case "/board":
     case "/":
       return "Board";
+
     case "/reports":
       return "Reports";
+
     case "/issues":
       return "Issues";
+
     case "/code":
       return "Code";
+
     case "/security":
       return "Security";
+
     case "/releases":
       return "Releases";
+
     case "/settings":
       return "Project Settings";
+
     default:
       return "Board";
   }

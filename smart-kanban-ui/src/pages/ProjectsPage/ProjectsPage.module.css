@@ -1,0 +1,250 @@
+.container {
+    padding: 40px 48px;
+    max-width: 1400px;
+}
+
+.topBar {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 32px;
+}
+
+.createBtn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+
+    background: linear-gradient(135deg, #3b82f6, #2563eb);
+    color: white;
+    font-size: 14px;
+    font-weight: 500;
+
+    transition: all 0.2s ease;
+}
+
+.createBtn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(37, 99, 235, 0.4);
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 28px;
+}
+
+.card {
+    background: linear-gradient(180deg, #0f172a 0%, #0b1220 100%);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 16px;
+    padding: 24px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    transition: all 0.25s ease;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(59, 130, 246, 0.4);
+    box-shadow:
+        0 12px 40px rgba(0, 0, 0, 0.6),
+        0 0 0 1px rgba(59, 130, 246, 0.15);
+}
+
+.cardHeader {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 16px;
+}
+
+.avatar {
+    width: 46px;
+    height: 46px;
+    border-radius: 12px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: linear-gradient(135deg, #3b82f6, #2563eb);
+    color: white;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.card h3 {
+    font-size: 16px;
+    font-weight: 600;
+    color: #f1f5f9;
+    margin: 0;
+}
+
+.key {
+    font-size: 12px;
+    color: #64748b;
+}
+
+.description {
+    font-size: 13px;
+    color: #94a3b8;
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+.stats {
+    display: flex;
+    gap: 24px;
+    margin-bottom: 20px;
+}
+
+.stats div {
+    display: flex;
+    flex-direction: column;
+    font-size: 12px;
+    color: #64748b;
+}
+
+.stats strong {
+    font-size: 16px;
+    color: #f1f5f9;
+}
+
+.actions {
+    display: flex;
+    gap: 12px;
+}
+
+.openBtn {
+    flex: 1;
+    padding: 9px 16px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+
+    background: rgba(59, 130, 246, 0.12);
+    color: #3b82f6;
+    font-size: 13px;
+    font-weight: 500;
+
+    transition: all 0.2s ease;
+}
+
+.openBtn:hover {
+    background: rgba(59, 130, 246, 0.2);
+}
+
+.editBtn {
+    padding: 9px 14px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: transparent;
+    color: #cbd5e1;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.editBtn:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.modalOverlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(5, 15, 35, 0.75);
+    backdrop-filter: blur(6px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+.modal {
+    width: 420px;
+    background: linear-gradient(180deg, #0f172a 0%, #0b1220 100%);
+    border-radius: 16px;
+    padding: 28px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+
+    animation: modalEnter 0.2s ease;
+}
+
+.modal h2 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #f1f5f9;
+    margin-bottom: 6px;
+}
+
+.modal input,
+.modal textarea {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 10px;
+    border-radius: 8px;
+    color: #e2e8f0;
+    font-size: 13px;
+}
+
+.modal textarea {
+    resize: none;
+    height: 80px;
+}
+
+.modalActions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 8px;
+}
+
+.cancelBtn {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #cbd5e1;
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.cancelBtn:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.confirmBtn {
+    background: linear-gradient(135deg, #3b82f6, #2563eb);
+    border: none;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.confirmBtn:hover {
+    background: #2563eb;
+}
+
+@keyframes modalEnter {
+    from {
+        opacity: 0;
+        transform: scale(0.96) translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}

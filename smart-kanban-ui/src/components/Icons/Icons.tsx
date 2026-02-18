@@ -216,3 +216,21 @@ export function NotebookIcon({ size = 20, stroke = 1.6 }: IconProps) {
     </svg>
   );
 }
+
+export function PlusIcon({ size = 16, stroke = 1.6 }: IconProps) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={stroke}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M12 5v14" />
+      <path d="M5 12h14" />
+    </svg>
+  );
+}

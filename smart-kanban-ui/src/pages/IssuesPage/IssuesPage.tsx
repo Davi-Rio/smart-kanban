@@ -143,9 +143,8 @@ export default function IssuesPage() {
                   </td>
                   <td>
                     <span
-                      className={`${styles.status} ${
-                        styles[issue.status.replace(" ", "")]
-                      }`}
+                      className={`${styles.status} ${styles[issue.status.replace(" ", "")]
+                        }`}
                     >
                       {issue.status}
                     </span>

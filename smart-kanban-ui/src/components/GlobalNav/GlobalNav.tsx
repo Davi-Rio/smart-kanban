@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom";
 import styles from "./GlobalNav.module.css";
 import { BellIcon, UserIcon } from "../Icons/Icons";
 
@@ -6,10 +7,41 @@ export default function GlobalNav() {
     <div className={styles.globalNav}>
       <div className={styles.left}>
         <nav className={styles.menu}>
-          <span>Projects</span>
-          <span>Dashboards</span>
-          <span>Teams</span>
-          <span>Apps</span>
+          <NavLink
+            to="/projects"
+            className={({ isActive }) =>
+              isActive ? `${styles.link} ${styles.active}` : styles.link
+            }
+          >
+            Projects
+          </NavLink>
+
+          <NavLink
+            to="/dashboards"
+            className={({ isActive }) =>
+              isActive ? `${styles.link} ${styles.active}` : styles.link
+            }
+          >
+            Dashboards
+          </NavLink>
+
+          <NavLink
+            to="/teams"
+            className={({ isActive }) =>
+              isActive ? `${styles.link} ${styles.active}` : styles.link
+            }
+          >
+            Teams
+          </NavLink>
+
+          <NavLink
+            to="/apps"
+            className={({ isActive }) =>
+              isActive ? `${styles.link} ${styles.active}` : styles.link
+            }
+          >
+            Apps
+          </NavLink>
         </nav>
       </div>
 

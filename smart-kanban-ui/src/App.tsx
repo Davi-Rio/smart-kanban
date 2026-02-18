@@ -3,6 +3,12 @@ import { Routes, Route, Navigate } from "react-router-dom";
 
 import MainLayout from "./layout/MainLayout";
 import Board from "./components/Board/Board";
+
+import ProjectsPage from "./pages/ProjectsPage/ProjectsPage";
+import DashboardsPage from "./pages/DashboardsPage/DashboardsPage";
+import TeamsPage from "./pages/TeamsPage/TeamsPage";
+import AppsPage from "./pages/AppsPage/AppsPage";
+
 import BacklogPage from "./pages/BacklogPage/BacklogPage";
 import RoadmapPage from "./pages/RoadmapPage/RoadmapPage";
 import ReportsPage from "./pages/ReportsPage/ReportsPage";
@@ -27,7 +33,7 @@ function App() {
     >
       <Routes>
 
-        {/* Redirect raiz para /board */}
+        {/* Redirect raiz */}
         <Route path="/" element={<Navigate to="/board" replace />} />
 
         {/* BOARD */}
@@ -44,6 +50,12 @@ function App() {
             />
           }
         />
+
+        {/* GLOBAL NAV PAGES */}
+        <Route path="/projects" element={<ProjectsPage />} />
+        <Route path="/dashboards" element={<DashboardsPage />} />
+        <Route path="/teams" element={<TeamsPage />} />
+        <Route path="/apps" element={<AppsPage />} />
 
         {/* OUTRAS PÁGINAS */}
         <Route path="/roadmap" element={<RoadmapPage />} />
